@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Giriş Yap{% endblock title %}
+
+{% block content %}
+
+<section style="background-color: coral; height: 100vh;">
+    <div class="container" style="height:100%">
+        <div class="d-flex justify-content-center align-items-center" style="height: 100%">
+            <form action="" method="POST">
+
+                <label style="font-size: 2rem;" for="name"> Ad </label> <br>
+                <input style="font-size: 2rem;" type="text"> <br>
+
+                <label style="font-size: 2rem;" for="surname">Soyad</label> <br>
+                <input style="font-size: 2rem;" type="text"> <br>
+
+                <label style="font-size: 2rem;" for="email"> E Mail</label> <br>
+                <input style="font-size: 2rem;" type="text"> <br>
+
+                <label style="font-size: 2rem;" for="password"> Şifre </label> <br>
+                <input style="font-size: 2rem;" type="password"> <br>
+
+                <button style="font-size: 2rem;" class="btn btn-primary" type="submit">Gönder</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
