@@ -1,13 +1,21 @@
 from flask import Flask, render_template
+from flask.json.provider import DefaultJSONProvider
 import requests
 from bs4 import BeautifulSoup
 import json
 import math
 import datetime
 
-app = Flask(__name__)
+class MyJsonProvider(DefaultJSONProvider):
+    def default(self,o):
+        if isinstance(o,datetime.datetime):
+            return o.isoformat(" ","seconds")
+        return super().default(o)
 
-latest_reload = datetime.datetime.now()
+app = Flask(__name__)
+app.json = MyJsonProvider(app)
+
+latest_reload = None
 alis = 0
 satis = 0
 
@@ -27,6 +35,7 @@ def make_the_request():
     satis = float(data["satis"])
     alis = float(data["alis"])
     latest_reload = datetime.datetime.now()
+    print(data)
 
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
 @app.route("/")
@@ -46,6 +55,7 @@ def reload():
     global alis
     global satis
 
+    print(type(latest_reload))
     if (datetime.datetime.now() - latest_reload).total_seconds() >= 20:
         make_the_request()
     return {
@@ -96,7 +106,8 @@ def error(e):
     return render_template("404.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    make_the_request()
+    app.run(debug=True, host="192.168.1.5")
 
 
 

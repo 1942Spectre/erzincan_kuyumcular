@@ -203,14 +203,57 @@ title %} {% block content %}
   function reload_data() {
     $.get("/ajax/reload", function (data, status) {
       Object.keys(data).forEach(function (key) {
-        console.log(key);
-        console.log(document);
-        document.getElementById(key).innerText = data[key];
+        if(key != "next_refresh"){
+          document.getElementById(key).innerText = data[key];
+        }
       });
     });
   }
-
+  var months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
   reload_data();
-  setInterval(reload_data, 20 * 1000);
+  function check_reload(){
+    var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth();
+    var year = d.getFullYear();
+    var hours = parseInt(d.getHours());
+    var mins = parseInt(d.getMinutes());
+    var seconds = parseInt(d.getSeconds());
+
+    var curtime = hours*60*60 + mins * 60 + seconds;
+    var last_time = document.getElementById("last_reload").innerText;
+    var last_time_array = last_time.split(" ");
+    var date_array = last_time_array[0].split("-");
+    var time_array = last_time_array[1].split(":");
+
+    last_day = parseInt(date_array[2]);
+    last_month = parseInt(date_array[1])-1;
+    last_year = parseInt(date_array[0]);
+
+    if (last_year != year) {
+      console.log(last_year + "!=" + year);
+      reload_data();
+    }
+
+    if (last_month != month){
+      console.log(last_month + "!=" + month);
+      reload_data();
+    }
+
+    if (last_day != day){
+      console.log(last_day + "!=" + day);
+      reload_data();
+    }
+
+    hours = parseInt(time_array[0]);
+    mins = parseInt(time_array[1]);
+    seconds = parseInt(time_array[2]);
+    timediff = curtime - ( hours*60*60 + mins*60 + seconds) 
+    if (timediff >= 20){
+      reload_data();
+      return;
+    }
+  }
+  setInterval(check_reload, 1 * 1000);
 </script>
 {% endblock scripts %}
