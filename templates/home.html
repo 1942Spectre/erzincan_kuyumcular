@@ -1,42 +1,56 @@
 {% extends 'base.html' %} {% block title %}Erzincan Altın Fiyatları{% endblock
 title %} {% block content %}
-<div class="container-fluid">
-  <div class="row" style="display: flex; align-content: center; justify-content: center;">
+<div class="container">
+  <div class="row">
+    <div style="background-color: #e63946" class="col-sm-4">
+      <h2>Alış: <span id="alis"> </span></h2>
+    </div>
+    <div style="background-color: #a8dadc" class="col-sm-4">
+      <h2>Satış: <span id="satis"> </span></h2>
+    </div>
+    <div class="col-sm-8" style="background-color: #f1faee">
+      Son Güncelleme: <span id="last_reload"></span>
+    </div>
+  </div>
+  <div
+    class="row"
+    style="display: flex; align-content: center; justify-content: center"
+  >
     <button
-      style="margin: 2rem"
+      style="margin: 2rem; background-color: #a8dadc; color: #1d3557"
       class="btn btn-primary"
       type="button"
       data-toggle="collapse"
       data-target="#bilezikler"
-      aria-expanded="false"
+      aria-expanded="true"
       aria-controls="bilezikler"
     >
       Bilezikler
     </button>
     <button
-      style="margin: 2rem"
+      style="margin: 2rem; background-color: #a8dadc; color: #1d3557"
       class="btn btn-primary"
       type="button"
       data-toggle="collapse"
       data-target="#sarrafiye"
-      aria-expanded="false"
+      aria-expanded="true"
       aria-controls="sarrafiye"
     >
       Sarrafiye
     </button>
     <button
-      style="margin: 2rem"
+      style="margin: 2rem; background-color: #a8dadc; color: #1d3557"
       class="btn btn-primary"
       type="button"
       data-toggle="collapse"
       data-target="#sertifikali"
-      aria-expanded="false"
+      aria-expanded="true"
       aria-controls="sertifikali"
     >
       Sertifikalı
     </button>
     <button
-      style="margin: 2rem"
+      style="margin: 2rem; background-color: #a8dadc; color: #1d3557"
       class="btn btn-primary"
       type="button"
       data-toggle="collapse"
@@ -51,7 +65,7 @@ title %} {% block content %}
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
-      <div class="collapse multi-collapse" id="bilezikler">
+      <div class="collapse multi-collapse show" id="bilezikler">
         <table class="table table-light table-striped">
           <thead>
             <tr>
@@ -62,34 +76,34 @@ title %} {% block content %}
           <tbody>
             <tr>
               <th scope="row">Cnc ve Burma Bilezik</th>
-              <td>{{context.cnc_burma}}</td>
+              <td id="cnc_burma">{{context.cnc_burma}}</td>
             </tr>
             <tr>
               <th scope="row">Şarnel 10gr Üzeri</th>
-              <td>{{context.sarnel_10_uzeri}}</td>
+              <td id="sarnel_10_uzeri">{{context.sarnel_10_uzeri}}</td>
             </tr>
             <tr>
               <th scope="row">Kaşlı Burma</th>
-              <td>{{context.kasli_burma}}</td>
+              <td id="kasli_burma">{{context.kasli_burma}}</td>
             </tr>
             <tr>
               <th scope="row">Örgü Bilezik</th>
-              <td>{{context.orgu_bilezik}}</td>
+              <td id="orgu_bilezik">{{context.orgu_bilezik}}</td>
             </tr>
             <tr>
               <th scope="row">Şarnel 8-10gr arası</th>
-              <td>{{context.sarnel_8_10}}</td>
+              <td id="sarnel_8_10">{{context.sarnel_8_10}}</td>
             </tr>
             <tr>
               <th scope="row">Şarnel 5-8gr arası</th>
-              <td>{{context.sarnel_5_8}}</td>
+              <td id="sarnel_5_8">{{context.sarnel_5_8}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="collapse multi-collapse" id="sarrafiye">
+      <div class="collapse multi-collapse show" id="sarrafiye">
         <table class="table table-light table-striped">
           <thead>
             <tr>
@@ -102,31 +116,31 @@ title %} {% block content %}
           <tbody>
             <tr>
               <th scope="row">Çeyrek</th>
-              <td>{{context.ceyrek_yeni}}</td>
-              <td>{{context.ceyrek_eski}}</td>
-              <td>{{context.ceyrek_alis}}</td>
+              <td id="ceyrek_yeni">{{context.ceyrek_yeni}}</td>
+              <td id="ceyrek_eski">{{context.ceyrek_eski}}</td>
+              <td id="ceyrek_alis">{{context.ceyrek_alis}}</td>
             </tr>
             <tr>
               <th scope="row">Yarım</th>
-              <td>{{context.yarim_yeni}}</td>
-              <td>{{context.yarim_eski}}</td>
-              <td>{{context.yarim_alis}}</td>
+              <td id="yarim_yeni">{{context.yarim_yeni}}</td>
+              <td id="yarim_eski">{{context.yarim_eski}}</td>
+              <td id="yarim_alis">{{context.yarim_alis}}</td>
             </tr>
             <tr>
               <th scope="row">Ziynet</th>
-              <td>{{context.ziynet_yeni}}</td>
-              <td>{{context.ziynet_eski}}</td>
-              <td>{{context.ziynet_alis}}</td>
+              <td id="ziynet_yeni">{{context.ziynet_yeni}}</td>
+              <td id="ziynet_eski">{{context.ziynet_eski}}</td>
+              <td id="ziynet_alis">{{context.ziynet_alis}}</td>
             </tr>
             <tr>
               <th scope="row">Ata</th>
-              <td>{{context.ata_satis}}</td>
+              <td id="ata_satis">{{context.ata_satis}}</td>
               <td></td>
-              <td>{{context.ata_alis}}</td>
+              <td id="ata_alis">{{context.ata_alis}}</td>
             </tr>
             <tr>
               <th scope="row">Beşli</th>
-              <td>{{context.besli}}</td>
+              <td id="besli">{{context.besli}}</td>
               <td></td>
               <td></td>
             </tr>
@@ -135,7 +149,7 @@ title %} {% block content %}
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="collapse multi-collapse" id="sertifikali">
+      <div class="collapse multi-collapse show" id="sertifikali">
         <table class="table table-light table-striped">
           <thead>
             <tr>
@@ -146,15 +160,15 @@ title %} {% block content %}
           <tbody>
             <tr>
               <th scope="row">22 Ayar 0.5gr</th>
-              <td>{{context._22_05}}</td>
+              <td id="_22_05">{{context._22_05}}</td>
             </tr>
             <tr>
               <th scope="row">22 Ayar 1gr</th>
-              <td>{{context._22_1}}</td>
+              <td id="_22_1">{{context._22_1}}</td>
             </tr>
             <tr>
               <th scope="row">24 Ayar 1gr</th>
-              <td>{{context._24_1}}</td>
+              <td id="_24_1">{{context._24_1}}</td>
             </tr>
           </tbody>
         </table>
@@ -172,11 +186,11 @@ title %} {% block content %}
           <tbody>
             <tr>
               <th scope="row">14 Ayar</th>
-              <td id="14_ayar_iscilikli">{{context._14_ayar}}</td>
+              <td id="_14_ayar">{{context._14_ayar}}</td>
             </tr>
             <tr>
               <th scope="row">22 Ayar</th>
-              <td id="22_ayar_iscilikli">{{context._22_ayar}}</td>
+              <td id="_22_ayar">{{context._22_ayar}}</td>
             </tr>
           </tbody>
         </table>
@@ -184,4 +198,19 @@ title %} {% block content %}
     </div>
   </div>
 </div>
-{% endblock content %}
+{% endblock content %} {% block scripts %}
+<script>
+  function reload_data() {
+    $.get("/ajax/reload", function (data, status) {
+      Object.keys(data).forEach(function (key) {
+        console.log(key);
+        console.log(document);
+        document.getElementById(key).innerText = data[key];
+      });
+    });
+  }
+
+  reload_data();
+  setInterval(reload_data, 20 * 1000);
+</script>
+{% endblock scripts %}

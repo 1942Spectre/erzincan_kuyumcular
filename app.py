@@ -3,14 +3,19 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import math
+import datetime
 
 app = Flask(__name__)
 
+latest_reload = datetime.datetime.now()
+alis = 0
+satis = 0
 
 
+## The request that gets prices from haremaltin
+def make_the_request():
+    global latest_reload,satis,alis
 
-@app.route("/")
-def home():
     r = requests.post("https://www.haremaltin.com/dashboard/ajax/altin",headers={
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
@@ -18,34 +23,51 @@ def home():
         "X-Requested-With": "XMLHttpRequest",
         "dil_kodu":"tr"
     })
-
-    
-
     data = json.loads(r.text)["data"]["ALTIN"]
+    satis = float(data["satis"])
+    alis = float(data["alis"])
+    latest_reload = datetime.datetime.now()
 
-    satis = math.ceil(float(data["satis"]))
-    alis = math.ceil(float(data["alis"]))
+# Home route renders an empty template, reload will be callled right after it and every 20 seconds.
+@app.route("/")
+def home():
+    return render_template("home.html",context=None)
 
-    data = {
+# Not created the registration process yet.
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
+# Reload function reloads the global alis,satis and latest reload time variables
+# IF THERE IS MORE THAN 20 SECONDS BETWEEN NOW AND LATEST RELOAD
+@app.route("/ajax/reload")
+def reload():
+    global latest_reload
+    global alis
+    global satis
+
+    if (datetime.datetime.now() - latest_reload).total_seconds() >= 20:
+        make_the_request()
+    return {
+    "last_reload":latest_reload,
+    "alis":alis,
+    "satis":satis,
     ## CEILED
-
     ## BILEZIKLER
-    "cnc_burma":math.ceil(945 * satis),
-    "sarnel_10_uzeri":math.ceil(955 * satis),
-    "kasli_burma":math.ceil(955 * satis),
-    "orgu_bilezik":math.ceil(960 * satis),
-    "sarnel_8_10":math.ceil(965 * satis),
-    "sarnel_5_8":math.ceil(975 * satis),
-
+    "cnc_burma":math.ceil(945 * satis / 1000),
+    "sarnel_10_uzeri":math.ceil(955 * satis / 1000),
+    "kasli_burma":math.ceil(955 * satis / 1000),
+    "orgu_bilezik":math.ceil(960 * satis / 1000),
+    "sarnel_8_10":math.ceil(965 * satis / 1000),
+    "sarnel_5_8":math.ceil(975 * satis / 1000),
     ## SERTIFIKALI
-    "_22_05":math.ceil(965 * satis),
-    "_22_1":math.ceil(950 * satis),
-    "_24_1":math.ceil(1025 * satis),
+    "_22_05":math.ceil(965 * satis / 2000),
+    "_22_1":math.ceil(950 * satis / 1000),
+    "_24_1":math.ceil(1025 * satis / 1000),
 
     ## ISCILIKLI
-    "_14_ayar":math.ceil(885 * satis),
-    "_22_ayar":math.ceil(1080 * satis),
+    "_14_ayar":math.ceil(885 * satis / 1000),
+    "_22_ayar":math.ceil(1080 * satis / 1000),
 
     ## Rounded to the upper closest 5
     ## SARRAFIYE GRUBU
@@ -61,29 +83,20 @@ def home():
     "ata_satis":math.ceil(6.8 * satis / 5) * 5,
     "ata_alis":math.ceil(6.6 * alis / 5) * 5,
     "besli":math.ceil(33.85* satis / 5) * 5
-
-    
-
     }
 
-    print(satis)
-    print(alis)
-
-
-    return render_template("home.html",context=data)
-
-@app.route("/register")
-def register():
-    return render_template("register.html")
-
+## NO LOGIN YET
 @app.route("/login")
 def login():
     return render_template("login.html")
 
+## A SIMPLE 404 PAGE
 @app.errorhandler(404)
 def error(e):
     return render_template("404.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
