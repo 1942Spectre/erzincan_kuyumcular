@@ -4,6 +4,6 @@ server_name 91.151.89.124;
 
 location / {
   include proxy_params;
-  proxy_pass http://unix:/root/erzincan_kuyumcular/app.sock;
+  proxy_pass http://unix:/erzincan_kuyumcular/app.sock;
     }
 }             
