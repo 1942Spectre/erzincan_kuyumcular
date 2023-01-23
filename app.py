@@ -35,12 +35,13 @@ def make_the_request():
     satis = float(data["satis"])
     alis = float(data["alis"])
     latest_reload = datetime.datetime.now()
-    print(data)
+    print(f'\nAlis: {alis} | Satis: {satis} | datetime: {latest_reload}\n')
 
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
 @app.route("/")
 def home():
-    return render_template("home.html",context=None)
+    return "Hello World"
+    # return render_template("home.html",context=None)
 
 # Not created the registration process yet.
 @app.route("/register")
@@ -55,7 +56,6 @@ def reload():
     global alis
     global satis
 
-    print(type(latest_reload))
     if (datetime.datetime.now() - latest_reload).total_seconds() >= 20:
         make_the_request()
     return {
@@ -64,7 +64,7 @@ def reload():
     "satis":satis,
     ## CEILED
     ## BILEZIKLER
-    "cnc_burma":math.ceil(945 * satis / 1000),
+    "cnc_burma":math.ceil(948 * satis / 1000),
     "sarnel_10_uzeri":math.ceil(955 * satis / 1000),
     "kasli_burma":math.ceil(955 * satis / 1000),
     "orgu_bilezik":math.ceil(960 * satis / 1000),
@@ -107,7 +107,7 @@ def error(e):
 
 if __name__ == "__main__":
     make_the_request()
-    app.run(debug=True, host="192.168.1.5")
+    app.run(debug=True, host = "0.0.0.0")
 
 
 
