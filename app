@@ -1,6 +1,6 @@
 server {
 listen 80;
-server_name www.erzincankuyumcu.com;
+server_name erzincankuyumcu.com;
 
 location / {
   include proxy_params;
