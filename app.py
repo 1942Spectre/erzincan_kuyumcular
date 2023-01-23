@@ -39,9 +39,14 @@ def make_the_request():
     print(f'\nAlis: {alis} | Satis: {satis} | datetime: {latest_reload}\n')
 
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
+
 @app.route("/")
-def home():
+def eski_home():
     return render_template("home.html",context=None)
+
+@app.route("/yeni")
+def home():
+    return render_template("home2.html",context=None)
 
 # Not created the registration process yet.
 @app.route("/register")
@@ -69,20 +74,11 @@ def reload():
     "satis":satis,
     ## CEILED
     ## BILEZIKLER
-    "cnc_burma":math.ceil(948 * satis / 1000),
-    "sarnel_10_uzeri":math.ceil(955 * satis / 1000),
-    "kasli_burma":math.ceil(955 * satis / 1000),
-    "orgu_bilezik":math.ceil(960 * satis / 1000),
-    "sarnel_8_10":math.ceil(965 * satis / 1000),
-    "sarnel_5_8":math.ceil(975 * satis / 1000),
+    "_22_ayar_bilezik":math.ceil(948 * satis / 1000),
     ## SERTIFIKALI
     "_22_05":math.ceil(965 * satis / 2000),
     "_22_1":math.ceil(950 * satis / 1000),
     "_24_1":math.ceil(1025 * satis / 1000),
-
-    ## ISCILIKLI
-    "_14_ayar":math.ceil(885 * satis / 1000),
-    "_22_ayar":math.ceil(1080 * satis / 1000),
 
     ## Rounded to the upper closest 5
     ## SARRAFIYE GRUBU
@@ -97,7 +93,6 @@ def reload():
     "ziynet_alis":math.ceil(6.4 * alis / 5) * 5,
     "ata_satis":math.ceil(6.8 * satis / 5) * 5,
     "ata_alis":math.ceil(6.6 * alis / 5) * 5,
-    "besli":math.ceil(33.85* satis / 5) * 5
     }
 
 ## NO LOGIN YET
