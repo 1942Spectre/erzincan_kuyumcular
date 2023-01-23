@@ -15,7 +15,8 @@ class MyJsonProvider(DefaultJSONProvider):
 app = Flask(__name__)
 app.json = MyJsonProvider(app)
 
-latest_reload = None
+
+latest_reload = datetime.datetime.now()
 alis = 0
 satis = 0
 
@@ -54,8 +55,13 @@ def reload():
     global latest_reload
     global alis
     global satis
+    
+    try:
+        c = (datetime.datetime.now() - latest_reload).total_seconds()
 
-    if (datetime.datetime.now() - latest_reload).total_seconds() >= 20:
+    except:
+        c = 21
+    if c >= 20:
         make_the_request()
     return {
     "last_reload":latest_reload,
@@ -104,7 +110,7 @@ def login():
 def error(e):
     return render_template("404.html")
 
-if __name__ == "__main__":
+if __name__ == "__main__":""
     make_the_request()
     app.run(debug=True, host = "0.0.0.0")
 
