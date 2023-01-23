@@ -13,7 +13,7 @@ Group=www-data
 WorkingDirectory=/home/harry/myFlaskApp/
 Environment="PATH=/root/erzincan_kuyumcular"
 # We'll then specify the commanded to start the service
-ExecStart=/root/erzincan_kuyumcular/env/lib/python3.10/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
+ExecStart=/root/erzincan_kuyumcular/env/bin/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
 # This will tell systemd what to link this service to if we enable it to start at boot. We want this service to start when the regular multi-user system is up and running:
 [Install]
 WantedBy=multi-user.target
