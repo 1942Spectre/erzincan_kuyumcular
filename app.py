@@ -40,8 +40,7 @@ def make_the_request():
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
 @app.route("/")
 def home():
-    return "Hello World"
-    # return render_template("home.html",context=None)
+    return render_template("home.html",context=None)
 
 # Not created the registration process yet.
 @app.route("/register")
