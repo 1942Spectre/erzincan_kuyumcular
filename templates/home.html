@@ -4,7 +4,8 @@ title %} {% block content %}
 
 <style>
   *{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
   }
   
 </style>
@@ -12,6 +13,7 @@ title %} {% block content %}
 
 
 <div class="container">
+  <h2 style="color: #f1faee; text-align: center;">Erzincan Tavsiye Edilen Altın Fiyatları</h2>
   <div class="row" style="display: flex; justify-content: center; margin-bottom:2rem;">
     <div style="border:none; border-top-left-radius: 1rem; color:#f1faee; text-align: center; background-color: #e63946;" class="col-sm-5">
       <h2>Alış: <span id="alis"> </span></h2>
@@ -33,19 +35,21 @@ title %} {% block content %}
           <thead>
             <tr>
               <th scope="col">Bilezik</th>
-              <th scope="col">Fiyat</th>
+              <th scope="col">Alış</th>
+              <th scope="col">Satış</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">22 Ayar Bilezik</th>
+              <td scope="row" id="_22_ayar_bilezik_alis">#</td>
               <td id="_22_ayar_bilezik">{{context.cnc_burma}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <div class="collapse multi-collapse show" id="sarrafiye">
         <table class="table table-light table-striped">
           <thead>
@@ -53,7 +57,8 @@ title %} {% block content %}
               <th scope="col">Sarrafiye</th>
               <th scope="col">Yeni</th>
               <th scope="col">Eski</th>
-              <th scope="col">Alış</th>
+              <th scope="col">Yeni Alış</th>
+              <th scope="col">Eski Alış</th>
             </tr>
           </thead>
           <tbody>
@@ -62,24 +67,35 @@ title %} {% block content %}
               <td id="ceyrek_yeni">{{context.ceyrek_yeni}}</td>
               <td id="ceyrek_eski">{{context.ceyrek_eski}}</td>
               <td id="ceyrek_alis">{{context.ceyrek_alis}}</td>
+              <td id="ceyrek_eski_alis">{{context.ceyrek_eski_alis}}</td>
             </tr>
             <tr>
               <th scope="row">Yarım</th>
               <td id="yarim_yeni">{{context.yarim_yeni}}</td>
               <td id="yarim_eski">{{context.yarim_eski}}</td>
               <td id="yarim_alis">{{context.yarim_alis}}</td>
+              <td id="yarim_eski_alis">{{context.yarim_eski_alis}}</td>
+
             </tr>
             <tr>
               <th scope="row">Ziynet</th>
               <td id="ziynet_yeni">{{context.ziynet_yeni}}</td>
               <td id="ziynet_eski">{{context.ziynet_eski}}</td>
               <td id="ziynet_alis">{{context.ziynet_alis}}</td>
+              <td id="ziynet_eski_alis">{{context.ziynet_eski_alis}}</td>
+
             </tr>
             <tr>
               <th scope="row">Ata</th>
               <td id="ata_satis">{{context.ata_satis}}</td>
               <td></td>
               <td id="ata_alis">{{context.ata_alis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Beşli</th>
+              <td id="besli_satis">#</td>
+              <td></td>
+              <td id="besli_alis">#</td>
             </tr>
           </tbody>
         </table>
@@ -91,20 +107,24 @@ title %} {% block content %}
           <thead>
             <tr>
               <th scope="col">Sertifikalı</th>
-              <th scope="col">Fiyat</th>
+              <th scope="col">Alış</th>
+              <th scope="col">Satış</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">22 Ayar 0.5gr</th>
+              <td id="_22_05_alis"></td>
               <td id="_22_05">{{context._22_05}}</td>
             </tr>
             <tr>
               <th scope="row">22 Ayar 1gr</th>
+              <td id="_22_1_alis"></td>
               <td id="_22_1">{{context._22_1}}</td>
             </tr>
             <tr>
               <th scope="row">24 Ayar 1gr</th>
+              <td id="_24_1_alis"></td>
               <td id="_24_1">{{context._24_1}}</td>
             </tr>
           </tbody>
