@@ -74,7 +74,7 @@ def reload():
     "satis":satis,
     ## CEILED
     ## BILEZIKLER
-    "_22_ayar_bilezik":math.floor(946 * satis / 1000),
+    "_22_ayar_bilezik":math.floor(947 * satis / 1000),
     "_22_ayar_bilezik_alis": math.floor(910*alis / 1000),
     ## SERTIFIKALI
     "_22_05":math.floor(965 * satis / 2000),
