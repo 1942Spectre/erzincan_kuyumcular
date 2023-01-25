@@ -1,36 +1,83 @@
 {% extends 'base.html' %} {% block title %}Erzincan Altın Fiyatları{% endblock
 title %} {% block content %}
 
-
 <style>
+
   *{
-    font-size: 1.3rem;
     font-weight: bold;
   }
-  
+
+  table{
+    border: 5px solid #a8dadc;
+  }
+
+  @media (min-width: 960px) {
+    th {
+      font-size: 1.2rem;
+    }
+
+    td {
+      font-size: 1.1rem;
+    }
+
+
+  }
+
+  @media (min-width: 575px){
+    .table {
+    margin: 1rem;
+  }
+  }
 </style>
 
-
-
 <div class="container">
-  <h2 style="color: #f1faee; text-align: center;">Erzincan Tavsiye Edilen Altın Fiyatları</h2>
-  <div class="row" style="display: flex; justify-content: center; margin-bottom:2rem;">
-    <div style="border:none; border-top-left-radius: 1rem; color:#f1faee; text-align: center; background-color: #e63946;" class="col-sm-5">
+  <h2 style="color: #f1faee; text-align: center">
+    Erzincan Tavsiye Edilen Altın Fiyatları
+  </h2>
+  <div
+    class="row"
+    style="display: flex; justify-content: center; margin-bottom: 2rem"
+  >
+    <div
+      style="
+        border: none;
+        color: #f1faee;
+        text-align: center;
+        background-color: #e63946;
+      "
+      class="col-sm-5"
+    >
       <h2>Alış: <span id="alis"> </span></h2>
     </div>
-    <div style="border:none; text-align: center; color:#1d3557; border-top-right-radius: 1rem; background-color: #a8dadc" class="col-sm-5">
+    <div
+      style="
+        border: none;
+        text-align: center;
+        color: #1d3557;
+        background-color: #a8dadc;
+      "
+      class="col-sm-5"
+    >
       <h2>Satış: <span id="satis"> </span></h2>
     </div>
-    <div class="col-sm-10" style="background-color: #f1faee; border-bottom-left-radius: .5rem; border-bottom-right-radius: .5rem; text-align: center;">
+    <div
+      class="col-sm-10"
+      style="
+        background-color: #f1faee;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        text-align: center;
+      "
+    >
       Son Güncelleme: <span id="last_reload"></span>
     </div>
   </div>
-  </div>
 </div>
+
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-12">
-      <div class="collapse multi-collapse show" id="bilezikler">
+    <div class="col-sm-4">
+      <div class="row">
         <table class="table table-light table-striped">
           <thead>
             <tr>
@@ -48,61 +95,7 @@ title %} {% block content %}
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="collapse multi-collapse show" id="sarrafiye">
-        <table class="table table-light table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Sarrafiye</th>
-              <th scope="col">Yeni</th>
-              <th scope="col">Eski</th>
-              <th scope="col">Yeni Alış</th>
-              <th scope="col">Eski Alış</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Çeyrek</th>
-              <td id="ceyrek_yeni">{{context.ceyrek_yeni}}</td>
-              <td id="ceyrek_eski">{{context.ceyrek_eski}}</td>
-              <td id="ceyrek_alis">{{context.ceyrek_alis}}</td>
-              <td id="ceyrek_eski_alis">{{context.ceyrek_eski_alis}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Yarım</th>
-              <td id="yarim_yeni">{{context.yarim_yeni}}</td>
-              <td id="yarim_eski">{{context.yarim_eski}}</td>
-              <td id="yarim_alis">{{context.yarim_alis}}</td>
-              <td id="yarim_eski_alis">{{context.yarim_eski_alis}}</td>
-
-            </tr>
-            <tr>
-              <th scope="row">Ziynet</th>
-              <td id="ziynet_yeni">{{context.ziynet_yeni}}</td>
-              <td id="ziynet_eski">{{context.ziynet_eski}}</td>
-              <td id="ziynet_alis">{{context.ziynet_alis}}</td>
-              <td id="ziynet_eski_alis">{{context.ziynet_eski_alis}}</td>
-
-            </tr>
-            <tr>
-              <th scope="row">Ata</th>
-              <td id="ata_satis">{{context.ata_satis}}</td>
-              <td></td>
-              <td id="ata_alis">{{context.ata_alis}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Beşli</th>
-              <td id="besli_satis">#</td>
-              <td></td>
-              <td id="besli_alis">#</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="collapse multi-collapse show" id="sertifikali">
+      <div class="row">
         <table class="table table-light table-striped">
           <thead>
             <tr>
@@ -131,6 +124,58 @@ title %} {% block content %}
         </table>
       </div>
     </div>
+    <div class="col-sm-8">
+      <div class="row">
+        <table class="table table-light table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Sarrafiye</th>
+              <th scope="col">Yeni</th>
+              <th scope="col">Eski</th>
+              <th scope="col">Yeni Alış</th>
+              <th scope="col">Eski Alış</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Çeyrek</th>
+              <td id="ceyrek_yeni">{{context.ceyrek_yeni}}</td>
+              <td id="ceyrek_eski">{{context.ceyrek_eski}}</td>
+              <td id="ceyrek_alis">{{context.ceyrek_alis}}</td>
+              <td id="ceyrek_eski_alis">{{context.ceyrek_eski_alis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Yarım</th>
+              <td id="yarim_yeni">{{context.yarim_yeni}}</td>
+              <td id="yarim_eski">{{context.yarim_eski}}</td>
+              <td id="yarim_alis">{{context.yarim_alis}}</td>
+              <td id="yarim_eski_alis">{{context.yarim_eski_alis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Ziynet</th>
+              <td id="ziynet_yeni">{{context.ziynet_yeni}}</td>
+              <td id="ziynet_eski">{{context.ziynet_eski}}</td>
+              <td id="ziynet_alis">{{context.ziynet_alis}}</td>
+              <td id="ziynet_eski_alis">{{context.ziynet_eski_alis}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Ata</th>
+              <td id="ata_satis">{{context.ata_satis}}</td>
+              <td></td>
+              <td id="ata_alis">{{context.ata_alis}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Beşli</th>
+              <td id="besli_satis">#</td>
+              <td></td>
+              <td id="besli_alis">#</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock content %} {% block scripts %}
@@ -138,15 +183,28 @@ title %} {% block content %}
   function reload_data() {
     $.get("/ajax/reload", function (data, status) {
       Object.keys(data).forEach(function (key) {
-        if(key != "next_refresh"){
+        if (key != "next_refresh") {
           document.getElementById(key).innerText = data[key];
         }
       });
     });
   }
-  var months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+  var months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   reload_data();
-  function check_reload(){
+  function check_reload() {
     var d = new Date();
     var day = d.getDate();
     var month = d.getMonth();
@@ -155,14 +213,14 @@ title %} {% block content %}
     var mins = parseInt(d.getMinutes());
     var seconds = parseInt(d.getSeconds());
 
-    var curtime = hours*60*60 + mins * 60 + seconds;
+    var curtime = hours * 60 * 60 + mins * 60 + seconds;
     var last_time = document.getElementById("last_reload").innerText;
     var last_time_array = last_time.split(" ");
     var date_array = last_time_array[0].split("-");
     var time_array = last_time_array[1].split(":");
 
     last_day = parseInt(date_array[2]);
-    last_month = parseInt(date_array[1])-1;
+    last_month = parseInt(date_array[1]) - 1;
     last_year = parseInt(date_array[0]);
 
     if (last_year != year) {
@@ -170,12 +228,12 @@ title %} {% block content %}
       reload_data();
     }
 
-    if (last_month != month){
+    if (last_month != month) {
       console.log(last_month + "!=" + month);
       reload_data();
     }
 
-    if (last_day != day){
+    if (last_day != day) {
       console.log(last_day + "!=" + day);
       reload_data();
     }
@@ -183,8 +241,8 @@ title %} {% block content %}
     hours = parseInt(time_array[0]);
     mins = parseInt(time_array[1]);
     seconds = parseInt(time_array[2]);
-    timediff = curtime - ( hours*60*60 + mins*60 + seconds) 
-    if (timediff >= 20){
+    timediff = curtime - (hours * 60 * 60 + mins * 60 + seconds);
+    if (timediff >= 20) {
       reload_data();
       return;
     }
