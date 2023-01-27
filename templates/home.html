@@ -47,7 +47,7 @@ title %} {% block content %}
       "
       class="col-sm-5"
     >
-      <h2>Alış: <span id="alis"> </span></h2>
+      <h2>Alış:<br/><span id="alis">{{context.alis}}</span></h2>
     </div>
     <div
       style="
@@ -58,7 +58,7 @@ title %} {% block content %}
       "
       class="col-sm-5"
     >
-      <h2>Satış: <span id="satis"> </span></h2>
+      <h2>Satış:<br/><span id="satis">{{context.satis}}</span></h2>
     </div>
     <div
       class="col-sm-10"
@@ -69,7 +69,7 @@ title %} {% block content %}
         text-align: center;
       "
     >
-      Son Güncelleme: <span id="last_reload"></span>
+      Son Güncelleme: <span id="last_reload">{{context.last_reload}}</span>
     </div>
   </div>
 </div>
@@ -89,8 +89,8 @@ title %} {% block content %}
           <tbody>
             <tr>
               <th scope="row">22 Ayar Bilezik</th>
-              <td scope="row" id="_22_ayar_bilezik_alis">#</td>
-              <td id="_22_ayar_bilezik">{{context.cnc_burma}}</td>
+              <td scope="row" id="_22_ayar_bilezik_alis">{{context._22_ayar_bilezik_alis}}</td>
+              <td id="_22_ayar_bilezik">{{context._22_ayar_bilezik}}</td>
             </tr>
           </tbody>
         </table>
@@ -107,17 +107,17 @@ title %} {% block content %}
           <tbody>
             <tr>
               <th scope="row">22 Ayar 0.5gr</th>
-              <td id="_22_05_alis"></td>
+              <td id="_22_05_alis">{{context._22_05_alis}}</td>
               <td id="_22_05">{{context._22_05}}</td>
             </tr>
             <tr>
               <th scope="row">22 Ayar 1gr</th>
-              <td id="_22_1_alis"></td>
+              <td id="_22_1_alis">{{context._22_1_alis}}</td>
               <td id="_22_1">{{context._22_1}}</td>
             </tr>
             <tr>
               <th scope="row">24 Ayar 1gr</th>
-              <td id="_24_1_alis"></td>
+              <td id="_24_1_alis">{{context._24_1_alis}}</td>
               <td id="_24_1">{{context._24_1}}</td>
             </tr>
           </tbody>
@@ -169,8 +169,8 @@ title %} {% block content %}
             </tr>
             <tr>
               <th scope="row">Beşli</th>
-              <td id="besli_alis">#</td>
-              <td id="besli_satis">#</td>
+              <td id="besli_alis">{{context.besli_alis}}</td>
+              <td id="besli_satis">{{context.besli_satis}}</td>
               <td></td>
               <td></td>
             </tr>
@@ -182,73 +182,26 @@ title %} {% block content %}
 </div>
 {% endblock content %} {% block scripts %}
 <script>
-  function reload_data() {
+  function reload_data_with_ajax() {
     $.get("/ajax/reload", function (data, status) {
       Object.keys(data).forEach(function (key) {
-        if (key != "next_refresh") {
-          document.getElementById(key).innerText = data[key];
-        }
+        document.getElementById(key).innerText = data[key];
       });
     });
   }
-  var months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  reload_data();
-  function check_reload() {
-    var d = new Date();
-    var day = d.getDate();
-    var month = d.getMonth();
-    var year = d.getFullYear();
-    var hours = parseInt(d.getHours());
-    var mins = parseInt(d.getMinutes());
-    var seconds = parseInt(d.getSeconds());
 
-    var curtime = hours * 60 * 60 + mins * 60 + seconds;
-    var last_time = document.getElementById("last_reload").innerText;
-    var last_time_array = last_time.split(" ");
-    var date_array = last_time_array[0].split("-");
-    var time_array = last_time_array[1].split(":");
-
-    last_day = parseInt(date_array[2]);
-    last_month = parseInt(date_array[1]) - 1;
-    last_year = parseInt(date_array[0]);
-
-    if (last_year != year) {
-      console.log(last_year + "!=" + year);
-      reload_data();
+  function reload_page(){
+    location.reload();
+  }
+ 
+  function try_reload() {
+    try{
+      reload_data_with_ajax();
     }
-
-    if (last_month != month) {
-      console.log(last_month + "!=" + month);
-      reload_data();
-    }
-
-    if (last_day != day) {
-      console.log(last_day + "!=" + day);
-      reload_data();
-    }
-
-    hours = parseInt(time_array[0]);
-    mins = parseInt(time_array[1]);
-    seconds = parseInt(time_array[2]);
-    timediff = curtime - (hours * 60 * 60 + mins * 60 + seconds);
-    if (timediff >= 20) {
-      reload_data();
-      return;
+    catch{
+      reload_page();
     }
   }
-  setInterval(check_reload, 1 * 1000);
+  setInterval(try_reload, 20 * 1000);
 </script>
 {% endblock scripts %}

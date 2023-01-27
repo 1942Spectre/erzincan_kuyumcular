@@ -21,6 +21,45 @@ alis = 0
 satis = 0
 
 
+
+def calculate_context(alis,satis,latest_reload):
+    context = {
+        "last_reload":latest_reload.isoformat(" ","seconds"),
+        "alis":alis,
+        "satis":satis,
+        ## CEILED
+        ## BILEZIKLER
+        "_22_ayar_bilezik":math.ceil(947 * satis / 1000),
+        "_22_ayar_bilezik_alis": math.floor(910*alis / 1000),
+        ## SERTIFIKALI
+        "_22_05":round(965 * satis / 2000 / 5) * 5,
+        "_22_1":round(953 * satis / 1000 / 5) * 5,
+        "_24_1":round(1025 * satis / 1000 / 5) * 5,
+        "_22_05_alis":round(916 * alis / 2000 / 5) * 5,
+        "_22_1_alis":round(916 * alis / 1000 / 5) * 5,
+        "_24_1_alis":round(995 * alis / 1000 / 5) * 5,
+
+        ## Rounded to the upper closest 5
+        ## SARRAFIYE GRUBU
+        "ceyrek_yeni":math.ceil(1.67 * satis / 5) * 5,
+        "ceyrek_eski":math.ceil(1.67 * satis / 5) * 5 - 30,
+        "ceyrek_alis":math.ceil(1.75 * 913/1000 * alis / 5) * 5 + 30,
+        "ceyrek_eski_alis":math.ceil(1.75 * 913/1000 * alis / 5) * 5,
+        "yarim_yeni":math.ceil(1.67 * satis / 5) * 10,
+        "yarim_eski":(math.ceil(1.67 * satis / 5) * 5 - 30) * 2 ,
+        "yarim_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5 + 30) * 2,
+        "yarim_eski_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5) * 2,
+        "ziynet_yeni":math.ceil(1.67 * satis / 5) * 20,
+        "ziynet_eski":(math.ceil(1.67 * satis / 5) * 5 - 30) * 4,
+        "ziynet_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5 + 30) * 4,
+        "ziynet_eski_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5) * 4,
+        "ata_satis":math.ceil(6.8 * satis / 5) * 5,
+        "ata_alis":math.ceil(6.575 * alis / 5) * 5,
+        "besli_satis":math.ceil(6.8 * satis / 5) * 25,
+        "besli_alis":math.ceil(6.575 * alis / 5) * 25,
+    }
+    return context
+
 ## The request that gets prices from haremaltin
 def make_the_request():
     global latest_reload,satis,alis
@@ -42,10 +81,16 @@ def make_the_request():
 
 @app.route("/")
 def eski_home():
-    return render_template("home.html",context=None)
+    global latest_reload
+    global alis
+    global satis
+
+    context = calculate_context(alis,satis,latest_reload)
+    return render_template("home.html",context=context)
 
 @app.route("/yeni")
 def home():
+    context = calculate_context(alis,satis,latest_reload)
     return render_template("home2.html",context=None)
 
 # Not created the registration process yet.
@@ -60,49 +105,12 @@ def reload():
     global latest_reload
     global alis
     global satis
-    
-    try:
-        c = (datetime.datetime.now() - latest_reload).total_seconds()
 
-    except:
-        c = 21
-    if c >= 20:
+    if (datetime.datetime.now() - latest_reload).total_seconds() >= 20:
         make_the_request()
-    return {
-    "last_reload":latest_reload,
-    "alis":alis,
-    "satis":satis,
-    ## CEILED
-    ## BILEZIKLER
-    "_22_ayar_bilezik":math.ceil(947 * satis / 1000),
-    "_22_ayar_bilezik_alis": math.floor(910*alis / 1000),
-    ## SERTIFIKALI
-    "_22_05":math.floor(965 * satis / 2000),
-    "_22_1":math.floor(953 * satis / 1000),
-    "_24_1":math.floor(1025 * satis / 1000),
-    "_22_05_alis":math.floor(916 * alis / 2000),
-    "_22_1_alis":math.floor(916 * alis / 1000),
-    "_24_1_alis":math.floor(995 * alis / 1000),
 
-    ## Rounded to the upper closest 5
-    ## SARRAFIYE GRUBU
-    "ceyrek_yeni":math.ceil(1.67 * satis / 5) * 5,
-    "ceyrek_eski":math.ceil(1.67 * satis / 5) * 5 - 30,
-    "ceyrek_alis":math.ceil(1.75 * 913/1000 * alis / 5) * 5 + 30,
-    "ceyrek_eski_alis":math.ceil(1.75 * 913/1000 * alis / 5) * 5,
-    "yarim_yeni":math.ceil(1.67 * satis / 5) * 10,
-    "yarim_eski":(math.ceil(1.67 * satis / 5) * 5 - 30) * 2 ,
-    "yarim_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5 + 30) * 2,
-    "yarim_eski_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5) * 2,
-    "ziynet_yeni":math.ceil(1.67 * satis / 5) * 20,
-    "ziynet_eski":(math.ceil(1.67 * satis / 5) * 5 - 30) * 4,
-    "ziynet_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5 + 30) * 4,
-    "ziynet_eski_alis":(math.ceil(1.75 * 913/1000 * alis / 5) * 5) * 4,
-    "ata_satis":math.ceil(6.8 * satis / 5) * 5,
-    "ata_alis":math.ceil(6.575 * alis / 5) * 5,
-    "besli_satis":math.ceil(6.8 * satis / 5) * 25,
-    "besli_alis":math.ceil(6.575 * alis / 5) * 25,
-    }
+    context = calculate_context(alis,satis,latest_reload)
+    return context
 
 ## NO LOGIN YET
 @app.route("/login")
