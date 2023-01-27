@@ -85,6 +85,8 @@ def eski_home():
     global alis
     global satis
 
+    if (datetime.datetime.now() - latest_reload).total_seconds() >= 20:
+        make_the_request()
     context = calculate_context(alis,satis,latest_reload)
     return render_template("home.html",context=context)
 
