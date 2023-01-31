@@ -1,225 +1,122 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+{% block content %}
 
-<style>
-  .table{
-  }
-
-  .double-table-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .double-table-container > table{
-    width: 90%;
-  }
-  .data-row-1 {
-    display: flex;
-    flex-direction: row;
-    background-color: #065a82;
-    padding: 1.2rem 0;
-    justify-content: space-evenly;
-    color: #fffcf2;
-  }
-
-  .data-row-2 {
-    display: flex;
-    flex-direction: row;
-    background-color: #1c7293;
-    padding: 1.2rem 0;
-    justify-content: space-evenly;
-    color: #fffcf2;
-  }
-  .table-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #fffcf2;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  .table-sub-header {
-    display: flex;
-    flex-direction: row;
-    background-color: #9eb3c2;
-    color: black;
-    padding: 1rem 0;
-    text-align: center;
-    justify-content: space-evenly;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  .data-value {
-    width: 80%;
-    align-items: center;
-    text-align: center;
-  }
-  .data-name {
-    width: 80%;
-    text-align: center;
-  }
-  .header-name {
-    width: 80%;
-    text-align: center;
-  }
-  .header-type {
-    width: 80%;
-    text-align: center;
-  }
-  h2{
-    text-align: center;
-    color: #fffcf2;
-  }
-</style>
-
-<h2>Erzincan Altın Fiyatları</h2>
-<div class="table">
-    <div class="table-sub-header">
-        <div class="header-type">
-            Son Güncelleme: <span id="last_reload"></span>
-        </div>
-    </div>
-    <div class="table-sub-header">
-        <div class="data-value" style="background-color: #ffca3a;">
-            Alış: <span id="alis">#</span>
-        </div>
-        <div class="data-value" style="background-color: #8ac926;">
-            Satış: <span id="satis">#</span>
-        </div>
-    </div>
-</div>
-
-<div class="table">
-  <div class="table-header">
-    <div class="header-name">Bilezik</div>
-  </div>
-  <div class="table-sub-header">
-    <div class="header-name">Tür</div>
-    <div class="header-type">Satış</div>
-  </div>
-  <div class="data-row-2">
-    <div class="data-name">22 Ayar</div>
-    <div class="data-value" id="_22_ayar_bilezik">#</div>
-  </div>
-</div>
-<div class="double-table-container">
-  <div class="table">
-    <div class="table-header">Sarrafiye</div>
-    <div class="table-sub-header">
-      <div class="header-name">Tür</div>
-      <div class="header-type">Yeni</div>
-      <div class="header-type">Eski</div>
-      <div class="header-type">Alış</div>
-    </div>
-    <div class="data-row-2">
-      <div class="data-value">Çeyrek</div>
-      <div class="data-value" id="ceyrek_yeni">#</div>
-      <div class="data-value" id="ceyrek_eski">#</div>
-      <div class="data-value" id="ceyrek_alis">#</div>
-    </div>
-    <div class="data-row-1">
-      <div class="data-value">Yarım</div>
-      <div class="data-value" id="yarim_yeni">#</div>
-      <div class="data-value" id="yarim_eski">#</div>
-      <div class="data-value" id="yarim_alis">#</div>
-    </div>
-    <div class="data-row-2">
-      <div class="data-value">Ziynet</div>
-      <div class="data-value" id="ziynet_yeni">#</div>
-      <div class="data-value" id="ziynet_eski">#</div>
-      <div class="data-value" id="ziynet_alis">#</div>
-    </div>
-    <div class="data-row-1">
-      <div class="data-value">Ata</div>
-      <div class="data-value" id="ata_satis">#</div>
-      <div class="data-value"></div>
-      <div class="data-value" id="ata_alis"></div>
-    </div>
-  </div>
-
-  <div class="table">
-    <div class="table-header">Sertifikalı</div>
-    <div class="table-sub-header">
-      <div class="header-name">Tür</div>
-      <div class="header-type">Satış</div>
-    </div>
-    <div class="data-row-2">
-      <div class="data-value">22 Ayar 0.5gr</div>
-      <div class="data-value" id="_22_05">#</div>
-    </div>
-    <div class="data-row-1">
-      <div class="data-value">22 Ayar 1gr</div>
-      <div class="data-value" id="_22_1">#</div>
-    </div>
-    <div class="data-row-2">
-      <div class="data-value">24 ayar 1gr</div>
-      <div class="data-value" id="_24_1">#</div>
-    </div>
-  </div>
-</div>
-
-
+<table class="table table-bordered table-striped table-dark">
+  <thead>
+    <tr>
+      <th></th>
+      <th scope="col">Tür</th>
+      <th scope="col">Alış</th>
+      <th scope="col">Satış</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>Haremaltın</td>
+      <td>{{context.alis}}</td>
+      <td>{{context.satis}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>22 Ayar Bilezik</td>
+      <td>{{context._22_ayar_bilezik_alis}}</td>
+      <td>{{context._22_ayar_bilezik}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Çeyrek Yeni</td>
+      <td>{{context.ceyrek_alis}}</td>
+      <td>{{context.ceyrek_yeni}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Çeyrek Eski</td>
+      <td>{{context.ceyrek_eski_alis}}</td>
+      <td>{{context.ceyrek_eski}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Yarım Yeni</td>
+      <td>{{context.yarim_eski_alis}}</td>
+      <td>{{context.yarim_eski}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Yarım Eski</td>
+      <td>{{context.yarim_eski_alis}}</td>
+      <td>{{context.yarim_eski}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Ziynet Yeni</td>
+      <td>{{context.ziynet_eski_alis}}</td>
+      <td>{{context.ziynet_eski}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Ziynet Eski</td>
+      <td>{{context.ziynet_eski_alis}}</td>
+      <td>{{context.ziynet_eski}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Ata</td>
+      <td>{{context.ata_alis}}</td>
+      <td>{{context.ata_satis}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>Beşli</td>
+      <td>{{context.besli_alis}}</td>
+      <td>{{context.besli_satis}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>22 ayar 0.5 gr</td>
+      <td>{{context._22_05_alis}}</td>
+      <td>{{context._22_05}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>22 ayar 1 gr</td>
+      <td>{{context._22_1_alis}}</td>
+      <td>{{context._22_1}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>24 ayar 1 gr</td>
+      <td>{{context._24_1_alis}}</td>
+      <td>{{context._24_1}}</td>
+    </tr>
+  </tbody>
+</table>
 
 {% endblock content %}
-
-{% block scripts %}
+{% endblock content %} {% block scripts %}
 <script>
-    function reload_data() {
-      $.get("/ajax/reload", function (data, status) {
-        Object.keys(data).forEach(function (key) {
-          if(key != "next_refresh"){
-            console.log(key);
-            document.getElementById(key).innerText = data[key];
-          }
-        });
+  function reload_data_with_ajax() {
+    $.get("/ajax/reload", function (data, status) {
+      Object.keys(data).forEach(function (key) {
+        document.getElementById(key).innerText = data[key];
       });
+    });
+  }
+
+  function reload_page(){
+    location.reload();
+  }
+ 
+  function try_reload() {
+    try{
+      reload_data_with_ajax();
     }
-    var months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
-    reload_data();
-    function check_reload(){
-      var d = new Date();
-      var day = d.getDate();
-      var month = d.getMonth();
-      var year = d.getFullYear();
-      var hours = parseInt(d.getHours());
-      var mins = parseInt(d.getMinutes());
-      var seconds = parseInt(d.getSeconds());
-  
-      var curtime = hours*60*60 + mins * 60 + seconds;
-      var last_time = document.getElementById("last_reload").innerText;
-      var last_time_array = last_time.split(" ");
-      var date_array = last_time_array[0].split("-");
-      var time_array = last_time_array[1].split(":");
-  
-      last_day = parseInt(date_array[2]);
-      last_month = parseInt(date_array[1])-1;
-      last_year = parseInt(date_array[0]);
-  
-      if (last_year != year) {
-        console.log(last_year + "!=" + year);
-        reload_data();
-      }
-  
-      if (last_month != month){
-        console.log(last_month + "!=" + month);
-        reload_data();
-      }
-  
-      if (last_day != day){
-        console.log(last_day + "!=" + day);
-        reload_data();
-      }
-  
-      hours = parseInt(time_array[0]);
-      mins = parseInt(time_array[1]);
-      seconds = parseInt(time_array[2]);
-      timediff = curtime - ( hours*60*60 + mins*60 + seconds) 
-      if (timediff >= 20){
-        reload_data();
-        return;
-      }
+    catch(e){
+      reload_page();
     }
-    setInterval(check_reload, 1 * 1000);
-  </script>
-  {% endblock scripts %}
+  }
+  setInterval(try_reload, 20 * 1000);
+</script>
+{% endblock scripts %}
+
   

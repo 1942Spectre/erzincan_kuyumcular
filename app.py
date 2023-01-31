@@ -96,7 +96,7 @@ def eski_home():
 @app.route("/yeni")
 def home():
     context = calculate_context(alis,satis,latest_reload)
-    return render_template("home2.html",context=None)
+    return render_template("home2.html",context=context)
 
 # Not created the registration process yet.
 @app.route("/register")
