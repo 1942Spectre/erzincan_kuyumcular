@@ -1,95 +1,125 @@
 {% extends "base.html" %} 
 {% block content %}
+<style>
+  *{
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  .bg-primary{
+    background-color: #8ecae6 !important;
+    color: #1b4965 !important;
+    text-align: center;
+  }
 
-<p style="text-align: center;">{{context.last_reload}}</p>
-<h2 style="color: aliceblue; text-align: center;">Erzincan Tavsiye Edilen Altın Fiyatları</h2>
-<table class="table table-bordered table-striped table-dark">
+  .bg-danger{
+    background-color: #e63946 !important;
+    color: aliceblue !important;
+    text-align: center;
+  }
+
+  .bg-blue{
+    background-color: #4a4e69 !important;
+    color: aliceblue !important;
+    text-align: center;
+  }
+</style>
+
+
+<h3 style="color: aliceblue; text-align: center;"> Erzincan Tavsiye Edilen Altın Fiyatları <span style="text-align: center; color: aliceblue !important;">{{context.last_reload}}</span> </h3>
+<table class="table table-bordered table-striped table-light">
   <thead>
     <tr class="">
-      <th></th>
-      <th scope="col">Tür</th>
-      <th scope="col">Alış</th>
-      <th scope="col">Satış</th>
+      <th scope="col" class="bg-blue">Tür</th>
+      <th scope="col" class="bg-danger" >Alış</th>
+      <th scope="col" class="bg-primary">Satış</th>
     </tr>
   </thead>
   <tbody>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>Haremaltın</td>
-      <td>{{context.alis}}</td>
-      <td>{{context.satis}}</td>
+
+    <tr>
+    
+      <td class="bg-blue">24 ayar 1 gr</td>
+      <td class="bg-danger">{{context._24_1_alis}}</td>
+      <td class="bg-primary">{{context._24_1}}</td>
     </tr>
-    <tr class="bg-danger">
-      <th scope="row"></th>
-      <td>22 Ayar Bilezik</td>
-      <td>{{context._22_ayar_bilezik_alis}}</td>
-      <td>{{context._22_ayar_bilezik}}</td>
+
+    <tr>
+    
+      <td class="bg-blue">22 ayar 1 gr</td>
+      <td class="bg-danger">{{context._22_1_alis}}</td>
+      <td class="bg-primary">{{context._22_1}}</td>
     </tr>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>Çeyrek Yeni</td>
-      <td>{{context.ceyrek_alis}}</td>
-      <td>{{context.ceyrek_yeni}}</td>
+
+    <tr>
+    
+      <td class="bg-blue">22 ayar 0.5 gr</td>
+      <td class="bg-danger">{{context._22_05_alis}}</td>
+      <td class="bg-primary">{{context._22_05}}</td>
     </tr>
-    <tr class="bg-danger">
-      <th scope="row"></th>
-      <td>Çeyrek Eski</td>
-      <td>{{context.ceyrek_eski_alis}}</td>
-      <td>{{context.ceyrek_eski}}</td>
+
+
+    <tr>
+    
+      <td class="bg-blue">22 Ayar Bilezik</td>
+      <td class="bg-danger">{{context._22_ayar_bilezik_alis}}</td>
+      <td class="bg-primary">{{context._22_ayar_bilezik}}</td>
     </tr>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>Yarım Yeni</td>
-      <td>{{context.yarim_alis}}</td>
-      <td>{{context.yarim_yeni}}</td>
+    <tr>
+    
+      <td class="bg-blue">Çeyrek Yeni</td>
+      <td class="bg-danger">{{context.ceyrek_alis}}</td>
+      <td class="bg-primary">{{context.ceyrek_yeni}}</td>
     </tr>
-    <tr class="bg-danger">
-      <th scope="row"></th>
-      <td>Yarım Eski</td>
-      <td>{{context.yarim_alis}}</td>
-      <td>{{context.yarim_eski}}</td>
+
+    <tr>
+    
+      <td class="bg-blue">Yarım Yeni</td>
+      <td class="bg-danger">{{context.yarim_alis}}</td>
+      <td class="bg-primary">{{context.yarim_yeni}}</td>
     </tr>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>Ziynet Yeni</td>
-      <td>{{context.ziynet_alis}}</td>
-      <td>{{context.ziynet_yeni}}</td>
+
+    <tr>
+    
+      <td class="bg-blue">Ziynet Yeni</td>
+      <td class="bg-danger">{{context.ziynet_alis}}</td>
+      <td class="bg-primary">{{context.ziynet_yeni}}</td>
     </tr>
-    <tr class="bg-danger">
-      <th scope="row"></th>
-      <td>Ziynet Eski</td>
-      <td>{{context.ziynet_eski_alis}}</td>
-      <td>{{context.ziynet_eski}}</td>
+    <tr>
+    
+      <td class="bg-blue">Ata</td>
+      <td class="bg-danger">{{context.ata_alis}}</td>
+      <td class="bg-primary">{{context.ata_satis}}</td>
     </tr>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>Ata</td>
-      <td>{{context.ata_alis}}</td>
-      <td>{{context.ata_satis}}</td>
+    <tr>
+    
+      <td class="bg-blue">Beşli</td>
+      <td class="bg-danger">{{context.besli_alis}}</td>
+      <td class="bg-primary">{{context.besli_satis}}</td>
     </tr>
-    <tr class="bg-danger">
-      <th scope="row"></th>
-      <td>Beşli</td>
-      <td>{{context.besli_alis}}</td>
-      <td>{{context.besli_satis}}</td>
+    <tr>
+    
+      <td class="bg-blue">Çeyrek Eski</td>
+      <td class="bg-danger">{{context.ceyrek_eski_alis}}</td>
+      <td class="bg-primary">{{context.ceyrek_eski}}</td>
     </tr>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>22 ayar 0.5 gr</td>
-      <td>{{context._22_05_alis}}</td>
-      <td>{{context._22_05}}</td>
+    <tr>
+    
+      <td class="bg-blue">Yarım Eski</td>
+      <td class="bg-danger">{{context.yarim_alis}}</td>
+      <td class="bg-primary">{{context.yarim_eski}}</td>
     </tr>
-    <tr class="bg-danger">
-      <th scope="row"></th>
-      <td>22 ayar 1 gr</td>
-      <td>{{context._22_1_alis}}</td>
-      <td>{{context._22_1}}</td>
+    <tr>
+    
+      <td class="bg-blue">Ziynet Eski</td>
+      <td class="bg-danger">{{context.ziynet_eski_alis}}</td>
+      <td class="bg-primary">{{context.ziynet_eski}}</td>
     </tr>
-    <tr class="bg-primary">
-      <th scope="row"></th>
-      <td>24 ayar 1 gr</td>
-      <td>{{context._24_1_alis}}</td>
-      <td>{{context._24_1}}</td>
+
+
+    <tr>
+      <td class="bg-blue">Has Altın</td>
+      <td class="bg-danger">{{context.alis}}</td>
+      <td class="bg-primary">{{context.satis}}</td>
     </tr>
   </tbody>
 </table>

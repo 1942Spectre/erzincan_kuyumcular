@@ -2,13 +2,20 @@
 title %} {% block content %}
 
 <style>
-
-  *{
+  * {
     font-weight: bold;
   }
 
-  table{
-    border: 5px solid #a8dadc;
+  th {
+    border: 1px solid black !important;
+  }
+
+  td{
+    border: 1px solid black !important;
+  }
+
+  .td-empty{
+    border: none !important;
   }
 
   @media (min-width: 960px) {
@@ -19,14 +26,29 @@ title %} {% block content %}
     td {
       font-size: 1.1rem;
     }
-
-
+  }
+  .bg-primary {
+    background-color: #a8dadc !important;
+    color: #1b4965 !important;
+    text-align: center;
   }
 
-  @media (min-width: 575px){
+  .bg-danger {
+    background-color: #e63946 !important;
+    color: aliceblue !important;
+    text-align: center;
+  }
+
+  .bg-blue {
+    background-color: #1b4965 !important;
+    color: aliceblue !important;
+    text-align: center;
+  }
+
+  @media (min-width: 575px) {
     .table {
-    margin: 1rem;
-  }
+      margin: 1rem;
+    }
   }
 </style>
 
@@ -47,7 +69,7 @@ title %} {% block content %}
       "
       class="col-sm-5"
     >
-      <h2>Alış:<br/><span id="alis">{{context.alis}}</span></h2>
+      <h2>Alış:<br /><span id="alis">{{context.alis}}</span></h2>
     </div>
     <div
       style="
@@ -58,7 +80,7 @@ title %} {% block content %}
       "
       class="col-sm-5"
     >
-      <h2>Satış:<br/><span id="satis">{{context.satis}}</span></h2>
+      <h2>Satış:<br /><span id="satis">{{context.satis}}</span></h2>
     </div>
     <div
       class="col-sm-10"
@@ -78,47 +100,49 @@ title %} {% block content %}
   <div class="row">
     <div class="col-sm-4">
       <div class="row">
-        <table class="table table-light table-striped">
+        <table class="table table-light">
           <thead>
             <tr>
               <th scope="col">Bilezik</th>
-              <th scope="col">Alış</th>
-              <th scope="col">Satış</th>
+              <th scope="col" class="bg-danger">Alış</th>
+              <th scope="col" class="bg-primary">Satış</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">22 Ayar Bilezik</th>
-              <td scope="row" id="_22_ayar_bilezik_alis">{{context._22_ayar_bilezik_alis}}</td>
-              <td id="_22_ayar_bilezik">{{context._22_ayar_bilezik}}</td>
+              <td scope="row" class="bg-danger" id="_22_ayar_bilezik_alis">
+                {{context._22_ayar_bilezik_alis}}
+              </td>
+              <td id="_22_ayar_bilezik" class="bg-primary">{{context._22_ayar_bilezik}}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="row">
-        <table class="table table-light table-striped">
+        <table class="table table-light">
           <thead>
             <tr>
               <th scope="col">Sertifikalı</th>
-              <th scope="col">Alış</th>
-              <th scope="col">Satış</th>
+              <th scope="col" class="bg-danger">Alış</th>
+              <th scope="col" class="bg-primary">Satış</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">22 Ayar 0.5gr</th>
-              <td id="_22_05_alis">{{context._22_05_alis}}</td>
-              <td id="_22_05">{{context._22_05}}</td>
+              <td id="_22_05_alis" class="bg-danger">{{context._22_05_alis}}</td>
+              <td id="_22_05" class="bg-primary">{{context._22_05}}</td>
             </tr>
             <tr>
               <th scope="row">22 Ayar 1gr</th>
-              <td id="_22_1_alis">{{context._22_1_alis}}</td>
-              <td id="_22_1">{{context._22_1}}</td>
+              <td id="_22_1_alis" class="bg-danger">{{context._22_1_alis}}</td>
+              <td id="_22_1" class="bg-primary">{{context._22_1}}</td>
             </tr>
             <tr>
               <th scope="row">24 Ayar 1gr</th>
-              <td id="_24_1_alis">{{context._24_1_alis}}</td>
-              <td id="_24_1">{{context._24_1}}</td>
+              <td id="_24_1_alis" class="bg-danger">{{context._24_1_alis}}</td>
+              <td id="_24_1" class="bg-primary">{{context._24_1}}</td>
             </tr>
           </tbody>
         </table>
@@ -126,53 +150,51 @@ title %} {% block content %}
     </div>
     <div class="col-sm-8">
       <div class="row">
-        <table class="table table-light table-striped">
+        <table class="table table-light">
           <thead>
             <tr>
               <th scope="col">Sarrafiye</th>
-              <th scope="col">Yeni Alış</th>
-              <th scope="col">Yeni</th>
-              <th scope="col">Eski Alış</th>
-              <th scope="col">Eski</th>
+              <th scope="col" class="bg-danger">Yeni Alış</th>
+              <th scope="col" class="bg-primary">Yeni</th>
+              <th scope="col" class="bg-danger">Eski Alış</th>
+              <th scope="col" class="bg-primary">Eski</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Çeyrek</th>
-              <td id="ceyrek_alis">{{context.ceyrek_alis}}</td>
-              <td id="ceyrek_yeni">{{context.ceyrek_yeni}}</td>
-              <td id="ceyrek_eski_alis">{{context.ceyrek_eski_alis}}</td>
-              <td id="ceyrek_eski">{{context.ceyrek_eski}}</td>
+              <td id="ceyrek_alis" class="bg-danger">{{context.ceyrek_alis}}</td>
+              <td id="ceyrek_yeni" class="bg-primary">{{context.ceyrek_yeni}}</td>
+              <td id="ceyrek_eski_alis" class="bg-danger">{{context.ceyrek_eski_alis}}</td>
+              <td id="ceyrek_eski" class="bg-primary">{{context.ceyrek_eski}}</td>
             </tr>
             <tr>
               <th scope="row">Yarım</th>
-              <td id="yarim_alis">{{context.yarim_alis}}</td>
-              <td id="yarim_yeni">{{context.yarim_yeni}}</td>
-              <td id="yarim_eski_alis">{{context.yarim_eski_alis}}</td>
-              <td id="yarim_eski">{{context.yarim_eski}}</td>
-              
+              <td id="yarim_alis" class="bg-danger">{{context.yarim_alis}}</td>
+              <td id="yarim_yeni" class="bg-primary">{{context.yarim_yeni}}</td>
+              <td id="yarim_eski_alis" class="bg-danger">{{context.yarim_eski_alis}}</td>
+              <td id="yarim_eski" class="bg-primary">{{context.yarim_eski}}</td>
             </tr>
             <tr>
               <th scope="row">Ziynet</th>
-              <td id="ziynet_alis">{{context.ziynet_alis}}</td>
-              <td id="ziynet_yeni">{{context.ziynet_yeni}}</td>
-              <td id="ziynet_eski_alis">{{context.ziynet_eski_alis}}</td>
-              <td id="ziynet_eski">{{context.ziynet_eski}}</td>
-              
+              <td id="ziynet_alis" class="bg-danger">{{context.ziynet_alis}}</td>
+              <td id="ziynet_yeni" class="bg-primary">{{context.ziynet_yeni}}</td>
+              <td id="ziynet_eski_alis" class="bg-danger">{{context.ziynet_eski_alis}}</td>
+              <td id="ziynet_eski" class="bg-primary">{{context.ziynet_eski}}</td>
             </tr>
             <tr>
               <th scope="row">Ata</th>
-              <td id="ata_alis">{{context.ata_alis}}</td>
-              <td id="ata_satis">{{context.ata_satis}}</td>              
-              <td></td>
-              <td></td>
+              <td id="ata_alis" class="bg-danger">{{context.ata_alis}}</td>
+              <td id="ata_satis" class="bg-primary">{{context.ata_satis}}</td>
+              <td class="bg-blue td-empty"></td>
+              <td class="bg-blue td-empty" ></td>
             </tr>
             <tr>
               <th scope="row">Beşli</th>
-              <td id="besli_alis">{{context.besli_alis}}</td>
-              <td id="besli_satis">{{context.besli_satis}}</td>
-              <td></td>
-              <td></td>
+              <td id="besli_alis" class="bg-danger">{{context.besli_alis}}</td>
+              <td id="besli_satis" class="bg-primary">{{context.besli_satis}}</td>
+              <td class="bg-blue td-empty" ></td>
+              <td class="bg-blue td-empty" ></td>
             </tr>
           </tbody>
         </table>
@@ -190,15 +212,14 @@ title %} {% block content %}
     });
   }
 
-  function reload_page(){
+  function reload_page() {
     location.reload();
   }
- 
+
   function try_reload() {
-    try{
+    try {
       reload_data_with_ajax();
-    }
-    catch(e){
+    } catch (e) {
       reload_page();
     }
   }
