@@ -24,16 +24,20 @@ satis = 0
 def make_the_request():
     global latest_reload,satis,alis
 
-    r = requests.post("https://www.haremaltin.com/dashboard/ajax/altin",headers={
-        "Sec-Fetch-Dest": "empty",
-        "Sec-Fetch-Mode": "cors",
-        "Sec-Fetch-Site": "same-origin",
-        "X-Requested-With": "XMLHttpRequest",
-        "dil_kodu":"tr"
-    })
-    data = json.loads(r.text)["data"]["ALTIN"]
-    satis = float(data["satis"])
-    alis = float(data["alis"])
+    try:
+        r = requests.post("https://www.haremaltin.com/dashboard/ajax/altin",headers={
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "X-Requested-With": "XMLHttpRequest",
+            "dil_kodu":"tr"
+        })
+        data = json.loads(r.text)["data"]["ALTIN"]
+        satis = float(data["satis"])
+        alis = float(data["alis"])
+    except Exception as e:
+        print(e)
+        print(datetime.datetime.now())
     latest_reload = datetime.datetime.now()
 
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
