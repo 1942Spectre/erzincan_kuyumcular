@@ -23,17 +23,19 @@ satis = 0
 ## The request that gets prices from haremaltin
 def make_the_request():
     global latest_reload,satis,alis
+
     r = requests.post("https://www.haremaltin.com/dashboard/ajax/altin",headers={
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origin",
-            "X-Requested-With": "XMLHttpRequest",
-            "dil_kodu":"tr"
-        })
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+        "X-Requested-With": "XMLHttpRequest",
+        "dil_kodu":"tr"
+    })
     data = json.loads(r.text)["data"]["ALTIN"]
     satis = float(data["satis"])
     alis = float(data["alis"])
     latest_reload = datetime.datetime.now()
+    print(f'\nAlis: {alis} | Satis: {satis} | datetime: {latest_reload}\n')
 
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
 
@@ -128,6 +130,3 @@ def error(e):
 if __name__ == "__main__":
     make_the_request()
     app.run(debug=True, host = "192.168.1.5")
-
-
-
