@@ -35,7 +35,6 @@ def make_the_request():
     satis = float(data["satis"])
     alis = float(data["alis"])
     latest_reload = datetime.datetime.now()
-    print(f'\nAlis: {alis} | Satis: {satis} | datetime: {latest_reload}\n')
 
 # Home route renders an empty template, reload will be callled right after it and every 20 seconds.
 
